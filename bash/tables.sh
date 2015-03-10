@@ -43,7 +43,7 @@ tcplist $(cat /tmp/TCPLIST)
 udplist $(cat /tmp/UDPLIST)
 
 # Define secondary parameters
-$IPT -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+$IPT -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 
 # Save current configuration
 #service iptables save
