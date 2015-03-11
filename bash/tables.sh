@@ -2,16 +2,17 @@
 
 IPT=$(which iptables)
 
+TCPLIST=/tmp/TCPLIST
+UDPLIST=/tmp/UDPLIST
+
 # Capture listening ports
-ss -lnt | awk '{print $4;}' | rev | cut -f 1 -d : | rev | sort | uniq | head -n -1 > /tmp/TCPLIST
-ss -lnu | awk '{print $4;}' | rev | cut -f 1 -d : | rev | sort | uniq | head -n -1 > /tmp/UDPLIST
+ss -lnt | awk '{print $4;}' | rev | cut -f 1 -d : | rev | sort | uniq | head -n -1 > $TCPLIST
+ss -lnu | awk '{print $4;}' | rev | cut -f 1 -d : | rev | sort | uniq | head -n -1 > $UDPLIST
 
 # Functions dynamically allow access on listening ports
 function tcplist {
-    if [ $# -eq 0 ]
+    if [ $# -ne 0 ]
     then
-        :
-    else
         for i in $@
         do
             $IPT -A INPUT -p tcp --dport $i -j ACCEPT
@@ -20,10 +21,8 @@ function tcplist {
 }
 
 function udplist {
-    if [ $# -eq 0 ]
+    if [ $# -ne 0 ]
     then
-        :
-    else
         for i in $@
         do
             $IPT -A INPUT -p udp --dport $i -j ACCEPT
@@ -39,8 +38,8 @@ $IPT -P FORWARD DROP
 $IPT -P OUTPUT ACCEPT
 
 # Define dynamic parameters
-tcplist $(cat /tmp/TCPLIST)
-udplist $(cat /tmp/UDPLIST)
+tcplist $(cat $TCPLIST)
+udplist $(cat $UDPLIST)
 
 # Define secondary parameters
 $IPT -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
