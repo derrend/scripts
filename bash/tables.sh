@@ -11,20 +11,16 @@ ss -lnu | awk '{print $4;}' | rev | cut -f 1 -d : | rev | sort | uniq | head -n 
 
 # Functions dynamically allow access on listening ports
 function tcplist {
-    if [ $# -ne 0 ]
-    then
-        for i in $@
-        do
+    if [ $# -ne 0 ]; then
+        for i in $@; do
             $IPT -A INPUT -p tcp --dport $i -j ACCEPT
         done
     fi
 }
 
 function udplist {
-    if [ $# -ne 0 ]
-    then
-        for i in $@
-        do
+    if [ $# -ne 0 ]; then
+        for i in $@; do
             $IPT -A INPUT -p udp --dport $i -j ACCEPT
         done
     fi
