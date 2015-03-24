@@ -35,8 +35,8 @@ $IPT -P FORWARD DROP
 $IPT -P OUTPUT ACCEPT
 
 # Define primary parameters
-tcplist $(cat $TCPLIST)
-udplist $(cat $UDPLIST)
+tcplist $(cat $TCPLIST) #<-- Port numbers may be manually appended here
+udplist $(cat $UDPLIST) #<-- Port numbers may be manually appended here
 
 # Define secondary parameters
 $IPT -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
