@@ -60,7 +60,9 @@ $IPT -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 #$IPT -A FORWARD -i eth1 -o eth0 -j ACCEPT
 
 # Primary paramiters **DEFINE CUSTOM RULES HERE**
-#$IPT -A EXPLICIT -p tcp --syn --dport 22 -m connlimit --connlimit-above 2 -j REJECT
+#IPE="$IPT -A EXPLICIT"
+#$IPE -p tcp --syn --dport 22 -m connlimit --connlimit-above 2 -j REJECT
+#IPE 
 
 # Save configuration
 #service iptables save
