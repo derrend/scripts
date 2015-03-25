@@ -29,14 +29,18 @@ function udplist {
     fi
 }
 
+# Create EXPLICIT chain
+$IPT -L EXPLICIT > /dev/null 2>&1
+if [ $? -ne 0 ]; then
+    $IPT -N EXPLICIT
+fi
+
 # Initial paramiters
 $IPT -F
 $IPT -t nat -F
 
-$IPT -N EXPLICIT
-
-$IPT -P INPUT DROP
-$IPT -P FORWARD DROP
+$IPT -P INPUT ACCEPT
+$IPT -P FORWARD ACCEPT
 $IPT -P OUTPUT ACCEPT
 
 $IPT -I INPUT -j EXPLICIT
