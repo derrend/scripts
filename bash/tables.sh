@@ -62,7 +62,7 @@ $IPT -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 # Primary paramiters **DEFINE CUSTOM RULES HERE**
 #IPE="$IPT -A EXPLICIT"
 #$IPE -p tcp --syn --dport 22 -m connlimit --connlimit-above 2 -j REJECT
-#IPE 
+#$IPE 
 
 # Save configuration
 #service iptables save
