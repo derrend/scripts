@@ -1,2 +1,2 @@
-# linux_bin
-some useful scripts
+# Scripts
+Useful scripts for personal reference.
