@@ -13,6 +13,19 @@ count = 1  # Setting c to 0 will begin prefix with '00', 1 results in '01' etc.
 
 
 def append_prefix(path, count, item):
+    """Takes an absolute path to a file and prefixes said file with an integer
+
+    Type:
+        Function
+
+    Args:
+        path  (str object, required) string object
+        count  (int object, required) integer to be prefixed to file
+        item  (str object, required) name of file to be prefixed
+
+    Returns:
+        string object (str): absolute path to file modified with integer prefix
+    """
     # Tests
     if type(path) is not str or type(item) is not str:
         raise TypeError('path and item arguments must be type str')
@@ -25,7 +38,6 @@ def append_prefix(path, count, item):
 
     if count < 0:
         raise ValueError('count argument value cannot be less than 0')
-
 
     # Add '0' to prefix if single digit.
     if len(str(count)) < 2:
