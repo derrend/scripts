@@ -2,7 +2,7 @@
 # Builtins
 import os
 import glob
-import sys
+from sys import argv
 
 # Settings
 dry_run = True  # For live execution set dry_run to False.
@@ -46,7 +46,19 @@ def append_prefix(path, count, item):
         return '{}{}_{}'.format(path, str(count), item.split('/')[-1])
 
 
-if __name__ == '__main__':
+def main(argv, count):
+    """Executes main script functionality
+
+    Type:
+        Function
+
+    Args:
+        argv  (list object, required) list object
+        count  (int object, required) integer to be prefixed to file
+
+    Returns:
+        None
+    """
     # # os.listdir does not return absolute path which is required by os.path.getctime function in sorted(key=).
     # lst = sorted(os.listdir(path), key=os.path.getctime)
 
@@ -56,7 +68,7 @@ if __name__ == '__main__':
     for item in lst:
 
         # Only rename files that do not match name of this script.
-        if sys.argv[0].split('/')[-1] not in item:
+        if argv[0].split('/')[-1] not in item:
 
             # Preview changes if dry_run is True.
             if dry_run:
@@ -65,3 +77,7 @@ if __name__ == '__main__':
                 os.rename(item, append_prefix(path, count, item))
 
             count += 1
+
+
+if __name__ == '__main__':
+    main(argv, count)
