@@ -44,8 +44,10 @@ def main(path=os.getcwd() + '/', search_param='*', count='1', dry_run='True'):
         Function
 
     Args:
-        argv  (list object, required) list object
-        count  (int object, required) integer to be prefixed to file
+        path  (str object, required) path to target directory
+        search_param  (str object, required) bash style pattern matching ('*.png')
+        count  (str object, required) value at which to begin numbering files
+        dry_run  (str object, required) set 'True' to preview changes, 'False' to write
 
     Returns:
         None
