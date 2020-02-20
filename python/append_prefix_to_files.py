@@ -4,13 +4,6 @@ import os
 import glob
 from sys import argv
 
-# Settings
-dry_run = True  # For live execution set dry_run to False.
-path = ''  # Empty string corresponds to current working directory.
-# path = '/path/to/target/directory/'  # Set absolute path to target directory, don't forget to include trailing '/'.
-search_param = '*'  # Define bash style search parameter ('*.jpg', '*.png') etc.
-count = 1  # Setting c to 0 will begin prefix with '00', 1 results in '01' etc.
-
 
 def append_prefix(path, count, item):
     """Takes an absolute path to a file and prefixes said file with an integer
@@ -26,19 +19,6 @@ def append_prefix(path, count, item):
     Returns:
         string object (str): absolute path to file modified with integer prefix
     """
-    # Tests
-    if type(path) is not str or type(item) is not str:
-        raise TypeError('path and item arguments must be type str')
-
-    if path[-1] is not '/':
-        raise ValueError('Trailing "/" expected at end of path argument')
-
-    if type(count) is not int:
-        raise TypeError('count argument must be type int')
-
-    if count < 0:
-        raise ValueError('count argument value cannot be less than 0')
-
     # Add '0' to prefix if single digit.
     if len(str(count)) < 2:
         return '{}0{}_{}'.format(path, str(count), item.split('/')[-1])
@@ -46,7 +26,7 @@ def append_prefix(path, count, item):
         return '{}{}_{}'.format(path, str(count), item.split('/')[-1])
 
 
-def main(argv, count):
+def main(path=os.getcwd() + '/', search_param='*', count='1', dry_run='True'):
     """Executes main script functionality
 
     Type:
@@ -59,6 +39,20 @@ def main(argv, count):
     Returns:
         None
     """
+    # Tests
+    count = int(count)
+
+    if dry_run.lower() not in ['true', 'false']:
+        raise ValueError('{} cannot be converted into type Bool')
+
+    dry_run = True if dry_run.lower() == 'true' else False
+
+    if path[-1] is not '/':
+        path = path + '/'
+
+    if count < 0:
+        raise ValueError('count argument value cannot be less than 0')
+
     # # os.listdir does not return absolute path which is required by os.path.getctime function in sorted(key=).
     # lst = sorted(os.listdir(path), key=os.path.getctime)
 
@@ -80,4 +74,17 @@ def main(argv, count):
 
 
 if __name__ == '__main__':
-    main(argv, count)
+    if len(argv) is 1:
+        main()
+
+    if len(argv) is 2:
+        main(argv[1])
+
+    if len(argv) is 3:
+        main(argv[1], argv[2])
+
+    if len(argv) is 4:
+        main(argv[1], argv[2], argv[3])
+
+    if len(argv) > 4:
+        raise ValueError('Too many arguments, did you remember to quote your wildcard? (\'*\')')
