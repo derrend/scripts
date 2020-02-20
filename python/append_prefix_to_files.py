@@ -5,6 +5,17 @@ import glob
 from sys import argv
 
 
+def help_text():
+    text = '''
+    Keywords:
+    help    Displays help text
+
+    Arguments:
+    (path=os.getcwd() + '/', search_param='*', count='1', dry_run='True')
+    '''
+    print(text)
+
+
 def append_prefix(path, count, item):
     """Takes an absolute path to a file and prefixes said file with an integer
 
@@ -71,17 +82,6 @@ def main(path=os.getcwd() + '/', search_param='*', count='1', dry_run='True'):
                 os.rename(item, append_prefix(path, count, item))
 
             count += 1
-
-
-def help_text():
-    text = '''
-    Keywords:
-    help    Displays help text
-
-    Arguments:
-    (path=os.getcwd() + '/', search_param='*', count='1', dry_run='True')
-    '''
-    print(text)
 
 
 if __name__ == '__main__':
