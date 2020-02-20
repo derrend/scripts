@@ -73,18 +73,32 @@ def main(path=os.getcwd() + '/', search_param='*', count='1', dry_run='True'):
             count += 1
 
 
+def help_text():
+    text = '''
+    Keywords:
+    help    Displays help text
+
+    Arguments:
+    (path=os.getcwd() + '/', search_param='*', count='1', dry_run='True')
+    '''
+    print(text)
+
+
 if __name__ == '__main__':
     if len(argv) is 1:
         main()
 
-    if len(argv) is 2:
+    elif len(argv) > 1 and argv[1].lower() == 'help':
+        help_text()
+
+    elif len(argv) is 2:
         main(argv[1])
 
-    if len(argv) is 3:
+    elif len(argv) is 3:
         main(argv[1], argv[2])
 
-    if len(argv) is 4:
+    elif len(argv) is 4:
         main(argv[1], argv[2], argv[3])
 
-    if len(argv) > 4:
+    else:
         raise ValueError('Too many arguments, did you remember to quote your wildcard? (\'*\')')
