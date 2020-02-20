@@ -85,20 +85,26 @@ def main(path=os.getcwd() + '/', search_param='*', count='1', dry_run='True'):
 
 
 if __name__ == '__main__':
+    # ()
     if len(argv) is 1:
         main()
 
+    # (path)
     elif len(argv) > 1 and argv[1].lower() == 'help':
         help_text()
 
+    # (path)
     elif len(argv) is 2:
         main(argv[1])
 
+    # (path, search_param)
     elif len(argv) is 3:
         main(argv[1], argv[2])
 
+    # (path, search_param, count)
     elif len(argv) is 4:
         main(argv[1], argv[2], argv[3])
 
+    # (path, search_param, count, dry_run)
     else:
         raise ValueError('Too many arguments, did you remember to quote your wildcard? (\'*\')')
