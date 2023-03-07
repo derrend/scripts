@@ -8,6 +8,6 @@ password_length = 64
 password = ''
 
 random.seed(seed_phrase)
-for x in range(64): password = password + random.choice(string.ascii_letters + string.digits)
+for x in range(password_length): password = password + random.choice(string.ascii_letters + string.digits)
 
 print(password)
