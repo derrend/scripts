@@ -1,5 +1,5 @@
+##Python 3.10.6
 ## Generate determanistic password from seed phrase.
-
 import random
 import string
 
