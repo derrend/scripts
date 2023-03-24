@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 ##Python 3.10.6
 
 ## Generate determanistic password from seed phrase.
