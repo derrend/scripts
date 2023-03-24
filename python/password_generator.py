@@ -7,8 +7,10 @@ import string
 from sys import argv
 
 def generate_password(seed_phrase, password_length):
+
     random.seed(seed_phrase)
     password = ''
+
     for x in range(password_length):
         password += random.choice(string.ascii_letters + string.digits)
 
