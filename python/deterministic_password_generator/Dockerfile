@@ -8,7 +8,7 @@ COPY README.txt deterministic_password_generator.py /root/
 
 ## initialise base image
 RUN apt-get update && \
-    apt-get install -y python3=3.10.6-1~22.04 && \
+    apt-get install -y python3=3.10.6-1~22.04.1 && \
     apt-get autoclean && \
     apt-get autoremove
 
